@@ -1,14 +1,23 @@
 package handlers
 
 import (
-	"fx-demo/pkg/logger"
-	"io"
+	"github.com/go-chi/chi"
+	"go.uber.org/fx"
 	"net/http"
 )
 
-func NewRouter (logger logger.Logger) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		logger.Println("Handler Called")
-		io.WriteString(w, "Hello, FX-DEMO\n")
+var Module = fx.Options(
+	fx.Provide(
+		NewRouter,
+		),
+	)
+
+func NewRouter() http.Handler {
+	router := chi.NewRouter()
+
+	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Hello, World"))
 	})
+
+	return router
 }
