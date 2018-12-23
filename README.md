@@ -1,6 +1,6 @@
-# Go-FX-Demo
+# Go-DI-Demo
 
-Demo of Uber's DI Framework FX with the ever so light-weight chi router
+Demo of using DI tools like Uber's FX and Google's Wire
 
 # Requirements
 
