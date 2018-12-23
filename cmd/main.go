@@ -1,6 +1,9 @@
-package cmd
+package main
 
 import (
+	"fx-demo/pkg/handlers"
+	"fx-demo/pkg/logger"
+	"fx-demo/pkg/server"
 	"github.com/go-chi/chi"
 	"go.uber.org/fx"
 )
@@ -11,8 +14,11 @@ func register() {
 
 func main() {
 	app := fx.New(
-		fx.Provide(),
-		fx.Invoke(register),
+		server.Module,
+		logger.Module,
+		fx.Provide(
+			handlers.NewRouter,
+			),
 		)
 
 	app.Run()
